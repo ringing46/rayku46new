@@ -1,0 +1,358 @@
+﻿@model IEnumerable<Friend.Models.MemberTable>
+@{
+    ViewBag.Title = "全部好友";
+}
+
+
+
+@*@Html.DropDownList("Friends", "好友");*@
+<!------ Include the above in your HEAD tag ---------->
+
+
+@section Styles111{
+    <style>
+
+
+        .cta-100 {
+            margin-top: 100px;
+            padding-left: 8%;
+            padding-top: 7%;
+        }
+
+        .col-md-4 {
+            padding-bottom: 20px;
+        }
+
+        .white {
+            color: #fff !important;
+        }
+
+        .mt {
+            float: left;
+            margin-top: -20px;
+            padding-top: 20px;
+        }
+
+        .bg-blue-ui {
+            background-color: #708198 !important;
+        }
+
+        figure img {
+            width: 300px;
+        }
+
+        #blogCarousel {
+            padding-bottom: 100px;
+        }
+
+        .blog .carousel-indicators {
+            left: 0;
+            top: -50px;
+            height: 50%;
+        }
+
+
+            /* The colour of the indicators */
+
+            .blog .carousel-indicators li {
+                background: #708198;
+                border-radius: 50%;
+                width: 8px;
+                height: 8px;
+            }
+
+            .blog .carousel-indicators.active {
+                background: #0fc9af;
+            }
+
+
+
+
+        .item-carousel-blog-block {
+            outline: medium none;
+            padding: 15px;
+        }
+
+        .item-box-blog {
+            border: 1px solid #dadada;
+            text-align: center;
+            z-index: 4;
+            padding: 20px;
+        }
+
+        .item-box-blog-image {
+            position: relative;
+        }
+
+            .item-box-blog-image figure img {
+                width: 100%;
+                height: auto;
+            }
+
+        .item-box-blog-date {
+            position: absolute;
+            z-index: 5;
+            padding: 4px 20px;
+            top: -20px;
+            right: 8px;
+            background-color: #41cb52;
+        }
+
+            .item-box-blog-date span {
+                color: #fff;
+                display: block;
+                text-align: center;
+                line-height: 1.2;
+            }
+
+                .item-box-blog-date span.mon {
+                    font-size: 18px;
+                }
+
+                .item-box-blog-date span.day {
+                    font-size: 16px;
+                }
+
+        .item-box-blog-body {
+            padding: 10px;
+        }
+
+        .item-heading-blog a h5 {
+            margin: 0;
+            line-height: 1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .item-box-blog-heading a {
+            text-decoration: none;
+        }
+
+        .item-box-blog-data p {
+            font-size: 13px;
+        }
+
+            .item-box-blog-data p i {
+                font-size: 12px;
+            }
+
+        .item-box-blog-text {
+            max-height: 100px;
+            overflow: hidden;
+        }
+
+        .mt-10 {
+            float: left;
+            margin-top: -10px;
+            padding-top: 10px;
+        }
+
+        .btn.bg-blue-ui.white.read {
+            cursor: pointer;
+            padding: 4px 20px;
+            float: left;
+            margin-top: 10px;
+        }
+
+            .btn.bg-blue-ui.white.read:hover {
+                box-shadow: 0px 5px 15px inset #4d5f77;
+            }
+
+        #zzz {
+            background-image: url('../../../../Image/2017040211342807.jpg');
+        }
+
+        #goTop {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+    <style>
+        .contrFontsize2 {
+            font-size: 15px;
+        }
+
+        .form1 {
+            position: fixed;
+            right: 400px;
+            bottom: 370px;
+            display: none;
+            z-index: 3;
+        }
+
+        .form2 {
+            position: fixed;
+            right: 400px;
+            bottom: 370px;
+            display: normal;
+            z-index: 3;
+        }
+
+        #divmar {
+            margin-bottom: 20px;
+        }
+
+        .btn-c {
+            background-color: seashell
+        }
+
+        .deepshd {
+            color: #e0dfdc;
+            background-color: #333;
+            letter-spacing: .1em;
+            text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/StyleSheet2.css" rel="stylesheet" />
+
+}
+
+<h2 class="deepshd" align="center">I-Friend</h2>
+<body id="zzz">
+    @*<a href="~/Search/Home/Index" class="btn btn-secondary mb-3"><i class="fa fa-plus-circle"></i> 尋找好友</a>
+        <a href="~/Friend/Home/Black" class="btn btn-secondary mb-3"><i class="fa fa-plus-circle"></i> 黑名單</a>
+        <a href="~/Search/Home/SearchDetail" class="btn btn-secondary mb-3"><i class="fa fa-plus-circle"></i> 我搜尋過的條件</a>
+        <a href="~/Friend/Home/Friendview" class="btn btn-secondary mb-3 btn btn-primary" id="goTop"><i class="fa fa-plus-circle"></i> 待確認好友</a>*@
+
+    <!------------ajax---------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" align="center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav" align="center">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <button id="myfriend" class="btn btn-warning btn-c">我的好友</button>
+                    <button id="waitfriend" class="btn btn-warning btn-c">待確認好友</button>
+                    <button id="blackfriend" class="btn btn-warning btn-c">黑名單</button>
+                    <button id="followme" class="btn btn-warning btn-c">按我讚的人</button>
+                    <button id="historysearch" class="btn btn-warning btn-c">我搜尋過的條件</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!----------------------------初始化------------------------------------->
+    <div class="container" id="friendIndex">
+        <!------------------ Hover Effect Style : Demo - 19 --------------->
+
+
+        <form method="POST" action="@Url.Action("ConfirmFriend1","Home")" novalidate="novalidate" id="form" name="form" class="form1 ">
+            <label for="Reason" class="badge badge-pill badge-primary contrFontsize2 "><i class="far fa-thumbs-down"></i>檢舉內容:</label>
+            <textarea id="Reason" name="Reason" class="form-control" style="width:280px; height:200px"></textarea>
+            <input type="button" class=" btn btn-info" id="DEMO" value="DEMO" />
+            <input type="button" class="btn btn-outline-danger" name="cancel1" id="cancel1" value="取消" style="margin-left:80px" />
+            <input type="hidden" id="friendID" name="friendID" value="" />
+            <input type="submit" class="btn btn-outline-success" value="檢舉" />
+        </form>
+
+        @if (ViewBag.any1 == 1)
+        {
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="container">
+                <div class="row mt-1">
+                    @foreach (var friends in Model)
+                    {
+                        <div class="col-md-4 col-sm-6">
+                            <div class="box19" style="width:320px;height:450px">
+
+                                <img class="pic-1 imge2" style="width:100%;height:100%" src="@Url.Action("GetImageByte", "Home", new { id = friends.MemberID })" />
+                                <div class="box-content">
+                                    <ul class="icon">
+                                        <li>
+                                            <a data-blackid="@friends.MemberID" class="black" title="加入黑名單"><i class="fa fa-thumbs-down "></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Friend/Home/Deletetest1/@friends.MemberID" title="刪除好友"><i class="fas fa-user-times"></i></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="icon">
+                                        <li>
+                                            <a href="~/Search/Home/memberDetailnew/@friends.MemberID" title="好友資料"><i class="fa fa-info"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Activity/Default/Createfri/@friends.MemberID" title="舉辦活動"><i class="fa fa-users"></i></a>
+                                        </li>
+                                    </ul>
+                                    <h3 class="title">@friends.Name</h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else if (ViewBag.any1 == 0)
+        {
+            <div class="container">
+                <div class="row mt-40">
+                    <div class="col-md-4 col-sm-6">
+                        <div style="width:320px;height:510px">
+                            <h1>目前沒有好友</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h1>test~</h1>
+        }
+    </div>
+
+
+</body>
+
+
+
+@section thumbsdown
+    {
+    <script>
+        $("body").on("click", ".black", function () {
+            let blackID = $(this).data("blackid");
+            console.log(blackID);
+            document.getElementById("friendID").value = blackID;
+            document.getElementById("form").className = "form2";
+        })
+
+        document.getElementById("cancel1").addEventListener("click", function () {
+            document.getElementById("form").className = "form1";
+        })
+        $("#DEMO").click(function () {
+            $("#Reason").val("我們理念不合");
+        })
+    </script>
+    <script>
+        $('#myfriend').click(function () {
+
+            $('#friendIndex').load('@Url.Action("PartFriendviewNow", "Home")');
+            $('#myfriend').css("background-color", "#fb8a37").siblings().css("background-color", "");
+
+        })
+
+        $('#waitfriend').click(function () {
+            $('#friendIndex').load('@Url.Action("PartFriendview","Home")');
+            $('#waitfriend').css("background-color", "#fb8a37").siblings().css("background-color", "");
+        })
+        $('#blackfriend').click(function () {
+            $('#friendIndex').load('@Url.Action("PartBlack","Home")');
+            $('#blackfriend').css("background-color", "#fb8a37").siblings().css("background-color", "");
+
+        })
+        $('#followme').click(function () {
+            $('#friendIndex').load('@Url.Action("PartFollow", "Home")');
+            $('#followme').css("background-color", "#fb8a37").siblings().css("background-color", "");
+        })
+
+        $('#historysearch').click(function () {
+            $('#friendIndex').load('@Url.Action("PartSearchDetail", "Home")');
+            $('#historysearch').css("background-color", "#fb8a37").siblings().css("background-color", "");
+        })
+    </script>
+}
+

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Friend.Models.MemberTable>
+
+
+
+<div class="container" id="friendIndex">
+    <!------------------ Hover Effect Style : Demo - 19 --------------->
+
+
+    <form method="POST" action="@Url.Action("ConfirmFriend1","Home")" novalidate="novalidate" id="form" name="form" class="form1">
+        <label for="Reason" class="badge badge-pill badge-primary contrFontsize2 "><i class="far fa-thumbs-down"></i>檢舉內容:</label>
+        <textarea id="Reason" name="Reason" class="form-control" style="width:280px; height:200px"></textarea>
+        <input type="button" class=" btn btn-info" id="DEMO" value="DEMO" />
+        <input type="button" class="btn btn-outline-danger" name="cancel1" id="cancel1" value="取消" style="margin-left:80px" />
+        <input type="hidden" id="friendID" name="friendID" value="" />
+        <input type="submit" class="btn btn-outline-success" value="檢舉" />
+    </form>
+
+    @if (ViewBag.any1 == 1)
+    {<br />
+        <br />
+        <br />
+        <br />
+        <div class="container">
+
+            <div class="row mt-1">
+                @foreach (var friends in Model)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="box19" style="width:320px;height:450px">
+
+                            <img class="pic-1 imge2" style="width:100%;height:100%" src="@Url.Action("GetImageByte","Home",new { id= friends.MemberID })" />
+                            <div class="box-content">
+                                <ul class="icon">
+                                    <li>
+                                        <a data-blackid="@friends.MemberID" class="black" title="加入黑名單"><i class="fa fa-thumbs-down "></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Friend/Home/Deletetest1/@friends.MemberID" title="刪除好友"><i class="fas fa-user-times"></i></a>
+                                    </li>
+                                </ul>
+                                <ul class="icon">
+                                    <li>
+                                        <a href="~/Search/Home/memberDetailnew/@friends.MemberID" title="好友資料"><i class="fa fa-info"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="~/Activity/Default/Createfri/@friends.MemberID" title="舉辦活動"><i class="fa fa-users"></i></a>
+                                    </li>
+                                </ul>
+                                <h3 class="title">@friends.Name</h3>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+    else if (ViewBag.any1 == 0)
+    {
+        <div class="container">
+            <div class="row mt-40">
+                <div class="col-md-4 col-sm-6">
+                    <div style="width:320px;height:510px">
+                        <h1>這裡空空如也~</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1>test~</h1>
+    }
+</div>
+<script>
+    $("#DEMO").click(function () {
+        $("#Reason").val("我們理念不合");
+    })
+</script>

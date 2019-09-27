@@ -1,0 +1,21 @@
+﻿@{
+    if (Request.Cookies["id"] == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+    else if (Request.Cookies["auid"].Value == "1")
+
+    {
+
+        Layout = "~/Views/Shared/_Layout1.cshtml";
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+
+    }
+
+
+}

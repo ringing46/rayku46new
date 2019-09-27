@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<Friend.Models.MemberTable>
+
+@if (ViewBag.any1 == 1)
+{
+    <div class="container">
+        <div class="row mt-40">
+            @foreach (var friends in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="box19" style="width:320px;height:450px">
+                        <img class="pic-1 imge2" style="width:100%;height:100%" src="@Url.Action("GetImageByte","Home",new { id= friends.MemberID })" />
+                        <div class="box-content">
+                            <ul class="icon">
+                                <li>
+                                    <a href="~/Search/Home/memberDetailnew/@friends.MemberID" title="追隨者資訊"><i class="fa fa-info"></i></a>
+                                </li>
+                            </ul>
+                            <h3 class="title">@friends.Name</h3>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else if (ViewBag.any1 == 0)
+{
+    <div class="container">
+        <div class="row mt-40">
+            <div class="col-md-4 col-sm-6">
+                <div style="width:320px;height:510px">
+                    <h1>這裡空空如也~</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h1>test~</h1>
+}

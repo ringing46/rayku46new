@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Friend.Models.SearchTable>
+@{
+        var tol = ViewBag.Count+1;
+  }
+<style>
+    a:hover {
+        color: #FF0000;
+        background-color: #FF8800;
+        text-decoration: underline;
+    }
+</style>
+<div id="accordion" role="tablist">
+    @foreach (var m in Model)
+    {
+
+        <div class="card" style="background-color:transparent">
+            <div class="card-header text-center" role="tab" id="headingTwo">
+                <h5 class="mb-0">
+                    <a class="collapsed click" data-id="@m.SearchID" data-toggle="collapse" href="#open_@m.SearchID" aria-expanded="false" aria-controls="open_@m.SearchID">
+                        @{tol = tol - 1;}
+                        <span>第 @tol 次搜尋:</span>
+                        <span>@m.Description</span>
+                        <span>搜尋日期: @m.SearchDate</span>
+                    </a>
+                </h5>
+            </div>
+
+            <div id="open_@m.SearchID" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-body">
+                    <table class="table" >
+                        <thead>
+                            <tr class="text-center" >
+                                
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div style="height:510px">
+
+</div>
+<script>
+    $("body").on("click", ".click", function () {
+        let id = $(this).data("id");
+        let frog = $(document.createDocumentFragment());
+        let target = $(this).parent().parent().next().children().children().children().children();
+        $.getJSON("@Url.Action("AjaxDetail", "Home")/" + id).done(function (datas) {
+            $.each(datas, function (idx, data) {
+                let con = $(`<th>${data.Interest}</th>`)
+                frog.append(con);
+            })
+            target.html(frog);
+            target.append(`<a class="btn btn-primary" style="margin-top:6px" href="@Url.Action("SearchAdvance", "Home",new {area= "Search" })/${id}">前往歷史搜尋</a>`);
+        })
+    })
+</script>
+

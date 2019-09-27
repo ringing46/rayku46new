@@ -1,0 +1,82 @@
+﻿
+@model IEnumerable<Friend.Models.MemberTable>
+@{
+    ViewBag.Title = "待確認好友";
+}
+
+@if (ViewBag.any1 == 1)
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <div class="row mt-1">
+            @foreach (var friends in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="box19" style="width:320px;height:450px">
+                        <img class="pic-1 imge2" style="width:100%;height:100%" src="@Url.Action("GetImageByte","Home",new { id= friends.MemberID })" />
+                        <div class="box-content">
+                            <ul class="icon">
+                                @*href="~/Friend/Home/ConfirmFriend/@friends.MemberID"*@
+                                <li><a class="clicka" data-id="@friends.MemberID" title="確認好友"><i class="fa fa-check"></i></a></li>
+                                <li><a href="~/Friend/Home/Reject/@friends.MemberID" title="拒絕好友邀請"><i class="fa fa-trash"></i></a></li>
+                            </ul>
+                            <ul class="icon">
+                                <li><a href="~/Search/Home/memberDetailnew/@friends.MemberID" title="好友詳細資料"><i class="fa fa-info"></i></a></li>
+                            </ul>
+                            <h3 class="title">@friends.Name</h3>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+}
+else if (ViewBag.any1 == 0)
+{
+    <div class="container">
+        <div class="row mt-40">
+            <div class="col-md-4 col-sm-6">
+                <div style="width:320px;height:510px">
+                    <h1>這裡空空如也~</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h1>test~</h1>
+}
+@*alert*@
+<div class="modal fade" id="alertChoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">好友確認通知</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                確定接受好友邀請嗎？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary " data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " id="clickok">確定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("body").on("click", ".clicka", function () {
+        let id = $(this).data("id");
+        $('#alertChoice').modal('show');
+         document.getElementById("clickok").addEventListener("click", function () {
+             window.location.href = '@Url.Action("ConfirmFriend", "Home")/' + id;
+            })
+        })
+</script>
